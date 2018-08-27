@@ -29,8 +29,7 @@ jobs:
           go test -v ./...
 
     - save_cache:
-        key:
-        - v1-dependencies-{{ .Environment.CIRCLE_JOB }}-{{ checksum "go.mod" }}
+        key: v1-dependencies-{{ .Environment.CIRCLE_JOB }}-{{ checksum "go.mod" }}
         paths:
         - "/go/pkg"
   test-1.9:
