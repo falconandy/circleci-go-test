@@ -15,23 +15,12 @@ jobs:
     steps:
     - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "go.mod" }}
-        # fallback to using the latest cache if no exact match is found
-        - v1-dependencies-
-
     - run: go get -v -t -d ./...
 
     - run:
         name: Run unit tests
         command: |
           go test -v ./...
-
-    - save_cache:
-        key: v1-dependencies-{{ checksum "go.mod" }}
-        paths:
-        - "/go/pkg"
   test-1.9:
     <<: *test-template
     docker:
